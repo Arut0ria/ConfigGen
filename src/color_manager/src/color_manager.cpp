@@ -153,8 +153,8 @@ void ColorManager::update_waybar_colors(
           ConfigLoader::getInstance().get_value(WAYBAR_LOCATION).value()) /
       ConfigLoader::getInstance().get_value(WAYBAR_COLOR_FILENAME).value();
 
-  auto lightest_color = get_darkest_color(colors);
-  auto darkest_color = get_lightest_color(colors);
+  auto lightest_color = get_lightest_color(colors);
+  auto darkest_color = get_darkest_color(colors);
 
   std::ofstream file(waybar_theme_file, std::ios::out | std::ios::trunc);
   if (!file.is_open()) {
