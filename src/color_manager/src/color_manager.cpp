@@ -35,6 +35,9 @@ ColorManager::load_pixels(const std::string &image_path) {
 }
 
 bool ColorManager::is_cached(const std::filesystem::path &image_path) {
+  std::filesystem::create_directory(
+      ConfigLoader::getInstance().get_value(CACHE_LOCATION).value());
+  
   std::filesystem::path cache_path =
       ConfigLoader::getInstance().get_value(CACHE_LOCATION).value() /
       image_path.filename().concat(extension);
@@ -129,7 +132,8 @@ ColorManager::load_colors(const std::filesystem::path &image_path) {
   return std::make_tuple(primary_colors, color_variants);
 }
 
-std::vector<Rgb>::const_iterator ColorManager::get_lightest_color(const std::vector<Rgb> &colors) {
+std::vector<Rgb>::const_iterator
+ColorManager::get_lightest_color(const std::vector<Rgb> &colors) {
   return std::max_element(
       colors.begin(), colors.end(), [](const Rgb &rgb, const Rgb &other) {
         return rgb.get_r() + rgb.get_g() + rgb.get_b() <
@@ -137,7 +141,8 @@ std::vector<Rgb>::const_iterator ColorManager::get_lightest_color(const std::vec
       });
 }
 
-std::vector<Rgb>::const_iterator ColorManager::get_darkest_color(const std::vector<Rgb> &colors) {
+std::vector<Rgb>::const_iterator
+ColorManager::get_darkest_color(const std::vector<Rgb> &colors) {
   return std::min_element(
       colors.begin(), colors.end(), [](const Rgb &rgb, const Rgb &other) {
         return rgb.get_r() + rgb.get_g() + rgb.get_b() <
@@ -153,12 +158,14 @@ void ColorManager::update_waybar_colors(
           ConfigLoader::getInstance().get_value(WAYBAR_LOCATION).value()) /
       ConfigLoader::getInstance().get_value(WAYBAR_COLOR_FILENAME).value();
 
-  auto lightest_color = get_lightest_color(colors);
+  // auto lightest_color = get_lightest_color(colors);
   auto darkest_color = get_darkest_color(colors);
+  // auto darkest_color = colors.begin();
 
   std::ofstream file(waybar_theme_file, std::ios::out | std::ios::trunc);
   if (!file.is_open()) {
-    throw std::ofstream::failure("Couldn't write file : " + waybar_theme_file.string());
+    throw std::ofstream::failure("Couldn't write file : " +
+                                 waybar_theme_file.string());
   }
 
   auto darkest_index = std::distance(colors.begin(), darkest_color);
