@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
   // TIMEIT(ColorManager::update_colors(argv[1]));
   auto [colors, variants] = TIMEIT(ColorManager::load_colors(argv[1]));
   TIMEIT(ColorManager::update_waybar_colors(colors, variants));
+  TIMEIT(ColorManager::update_hyprland_colors(colors, variants, argv[1]));
 
   return EXIT_SUCCESS;
 }

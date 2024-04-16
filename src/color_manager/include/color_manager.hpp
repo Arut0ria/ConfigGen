@@ -2,21 +2,21 @@
 #define COLOR_MANAGER_HPP
 
 #include <algorithm>
+#include <exception>
 #include <filesystem>
 #include <fstream>
 #include <optional>
 #include <regex>
 #include <unordered_map>
-#include <exception>
 
-#include "yaml-cpp/yaml.h"
 #include "stb_image.h"
+#include "yaml-cpp/yaml.h"
 
-#include "patterns.hpp"
 #include "config_loader.hpp"
-#include "kmeans.hpp"
-#include "rgb.hpp"
 #include "hsl.hpp"
+#include "kmeans.hpp"
+#include "patterns.hpp"
+#include "rgb.hpp"
 
 namespace ColorManager {
 const std::string extension = ".yaml";
@@ -33,11 +33,17 @@ bool is_cached(const std::filesystem::path &image_path);
 std::tuple<std::vector<Rgb>, std::vector<std::vector<Rgb>>>
 load_colors(const std::filesystem::path &image_path);
 
-std::vector<Rgb>::const_iterator get_darkest_color(const std::vector<Rgb>& colors);
-std::vector<Rgb>::const_iterator get_lightest_color(const std::vector<Rgb>& colors);
+std::vector<Rgb>::const_iterator
+get_darkest_color(const std::vector<Rgb> &colors);
+std::vector<Rgb>::const_iterator
+get_lightest_color(const std::vector<Rgb> &colors);
 
 void update_waybar_colors(const std::vector<Rgb> &colors,
                           const std::vector<std::vector<Rgb>> &variants);
+
+void update_hyprland_colors(const std::vector<Rgb> &colors,
+                            const std::vector<std::vector<Rgb>> &variants,
+                            const std::string &wallpaper);
 
 } // namespace ColorManager
 

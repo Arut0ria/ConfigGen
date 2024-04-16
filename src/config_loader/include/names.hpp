@@ -4,5 +4,7 @@
 #define CACHE_LOCATION "cache_location"
 #define WAYBAR_LOCATION "waybar_location"
 #define WAYBAR_COLOR_FILENAME "waybar_color_filename"
+#define HYPRLAND_COLOR_FILENAME "hyprland_color_filename"
+#define HYPRLAND_CONFIG_LOCATION "hyprland_config_location"
 
 #endif

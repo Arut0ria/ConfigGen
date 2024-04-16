@@ -12,6 +12,15 @@ constexpr char waybar_theme_pattern[] =
 @define-color wb-act-fg {};\n\
 @define-color wb-hvr-bg {};\n\
 @define-color wb-hvr-fg {};\n";
-};
+
+constexpr char hyprland_color_config_pattern[] = "$wallpaper={}\n\
+$foreground=rgb({})\n\
+$foreground_variant=rgb({})\n\
+$background=rgb({})\n\
+$background_variant=rgb({})\n\
+$secondary=rgb({})\n\
+$secondary_variant=rgb({})\n\
+";
+}; // namespace ColorManager
 
 #endif

@@ -20,7 +20,9 @@ private:
   std::unordered_map<std::string, std::string> config = {
       {CACHE_LOCATION, home_directory / ".cache/config_gen"},
       {WAYBAR_LOCATION, home_directory / ".config/waybar"},
-      {WAYBAR_COLOR_FILENAME, "colors.css"}};
+      {WAYBAR_COLOR_FILENAME, "colors.css"},
+      {HYPRLAND_COLOR_FILENAME, "colors.conf"},
+      {HYPRLAND_CONFIG_LOCATION, home_directory / ".config/hypr"}};
 
   const std::regex comment_regex = std::regex("(?:^|[:space:]+)#(.*)$");
   std::string strip_comments(const std::string &str);
