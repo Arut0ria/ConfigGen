@@ -44,6 +44,8 @@ void update_waybar_colors(const std::vector<Rgb> &colors,
 void update_hyprland_colors(const std::vector<Rgb> &colors,
                             const std::vector<std::vector<Rgb>> &variants,
                             const std::string &wallpaper);
+void update_rofi_colors(const std::vector<Rgb> &colors,
+                        const std::vector<std::vector<Rgb>> &variants);
 
 } // namespace ColorManager
 

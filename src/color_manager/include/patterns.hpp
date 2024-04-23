@@ -21,6 +21,16 @@ $background_variant=rgb({})\n\
 $secondary=rgb({})\n\
 $secondary_variant=rgb({})\n\
 ";
+
+constexpr char rofi_color_pattern[] = "* {{\n\
+    main-bg:            {};\n\
+    main-fg:            {};\n\
+    main-br:            {};\n\
+    main-ex:            {};\n\
+    select-bg:          {};\n\
+    select-fg:          {};\n\
+}}\
+";
 }; // namespace ColorManager
 
 #endif

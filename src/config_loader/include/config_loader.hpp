@@ -22,7 +22,9 @@ private:
       {WAYBAR_LOCATION, home_directory / ".config/waybar"},
       {WAYBAR_COLOR_FILENAME, "colors.css"},
       {HYPRLAND_COLOR_FILENAME, "colors.conf"},
-      {HYPRLAND_CONFIG_LOCATION, home_directory / ".config/hypr"}};
+      {HYPRLAND_CONFIG_LOCATION, home_directory / ".config/hypr"},
+      {ROFI_COLOR_FILENAME, "colors.rasi"},
+      {ROFI_CONFIG_LOCATION, home_directory / ".config/rofi"}};
 
   const std::regex comment_regex = std::regex("(?:^|[:space:]+)#(.*)$");
   std::string strip_comments(const std::string &str);

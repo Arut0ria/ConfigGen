@@ -199,18 +199,38 @@ void ColorManager::update_hyprland_colors(
   auto darkest_index = std::distance(colors.begin(), darkest_color);
   auto lightest_index = std::distance(colors.begin(), lightest_color);
 
-  file << std::format(hyprland_color_config_pattern, wallpaper,
-                      colors[0].to_hex().substr(1),
-                      variants[0][2].to_hex().substr(1),
-                      colors[1].to_hex().substr(1),
-                      variants[1][2].to_hex().substr(1),
-                      colors[2].to_hex().substr(1),
-                      variants[2][2].to_hex().substr(1));
+  file << std::format(
+      hyprland_color_config_pattern, wallpaper, colors[0].to_hex().substr(1),
+      variants[0][2].to_hex().substr(1), colors[1].to_hex().substr(1),
+      variants[1][2].to_hex().substr(1), colors[2].to_hex().substr(1),
+      variants[2][2].to_hex().substr(1));
+  file.close();
+}
 
-  // file << std::format(hyprland_color_config_pattern, wallpaper,
-  //                     lightest_color->to_hex().substr(1),
-  //                     variants[lightest_index][2].to_hex().substr(1),
-  //                     darkest_color->to_hex().substr(1),
-  //                     variants[darkest_index][0].to_hex().substr(1));
+void ColorManager::update_rofi_colors(
+    const std::vector<Rgb> &colors,
+    const std::vector<std::vector<Rgb>> &variants) {
+  auto rofi_color_file =
+      std::filesystem::path(
+          ConfigLoader::getInstance().get_value(ROFI_CONFIG_LOCATION).value()) /
+      ConfigLoader::getInstance().get_value(ROFI_COLOR_FILENAME).value();
+
+  std::ofstream file(rofi_color_file, std::ios::out | std::ios::trunc);
+  if (!file.is_open()) {
+    throw std::ofstream::failure("Couldn't write file : " +
+                                 rofi_color_file.string());
+  }
+
+  auto darkest_color = get_darkest_color(colors);
+  auto lightest_color = get_lightest_color(colors);
+
+  auto darkest_index = std::distance(colors.begin(), darkest_color);
+  auto lightest_index = std::distance(colors.begin(), lightest_color);
+
+  file << std::format(
+      rofi_color_pattern, darkest_color->to_hex(),
+      variants[darkest_index][2].to_hex(), lightest_color->to_hex(),
+      variants[lightest_index][2].to_hex(), variants[darkest_index][2].to_hex(),
+      variants[lightest_index][2].to_hex());
   file.close();
 }
