@@ -46,6 +46,8 @@ void update_hyprland_colors(const std::vector<Rgb> &colors,
                             const std::string &wallpaper);
 void update_rofi_colors(const std::vector<Rgb> &colors,
                         const std::vector<std::vector<Rgb>> &variants);
+void update_dunst_colors(const std::vector<Rgb> &colors,
+                         const std::vector<std::vector<Rgb>> &variants);
 
 } // namespace ColorManager
 

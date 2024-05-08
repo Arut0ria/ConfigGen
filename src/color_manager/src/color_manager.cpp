@@ -234,3 +234,54 @@ void ColorManager::update_rofi_colors(
       variants[lightest_index][2].to_hex());
   file.close();
 }
+
+void ColorManager::update_dunst_colors(
+    const std::vector<Rgb> &colors,
+    const std::vector<std::vector<Rgb>> &variants) {
+  auto dunst_config_file =
+      std::filesystem::path(ConfigLoader::getInstance()
+                                .get_value(DUNST_CONFIG_LOCATION)
+                                .value()) /
+      ConfigLoader::getInstance().get_value(DUNST_CONFIG_FILENAME).value();
+
+  auto dunst_preconfig_file =
+      std::filesystem::path(ConfigLoader::getInstance()
+                                .get_value(DUNST_CONFIG_LOCATION)
+                                .value()) /
+      ConfigLoader::getInstance().get_value(DUNST_PRECONFIG_FILENAME).value();
+
+  std::ifstream file(dunst_preconfig_file, std::ios::in);
+  if (!file.is_open()) {
+    throw std::ofstream::failure("Couldn't write file : " +
+                                 dunst_preconfig_file.string());
+  }
+
+  auto darkest_color = get_darkest_color(colors);
+  auto lightest_color = get_lightest_color(colors);
+
+  auto darkest_index = std::distance(colors.begin(), darkest_color);
+  auto lightest_index = std::distance(colors.begin(), lightest_color);
+
+  std::string config;
+  file.seekg(0, std::ios::end);
+  config.reserve(file.tellg());
+  file.seekg(0, std::ios::beg);
+
+  config.assign((std::istreambuf_iterator<char>(file)),
+                std::istreambuf_iterator<char>());
+  file.close();
+
+  config += std::format(
+      dunst_color_pattern, variants[lightest_index][2].to_hex(), "#000000",
+      lightest_color->to_hex(), variants[darkest_index][2].to_hex(), "#FFFFFF",
+      darkest_color->to_hex());
+
+  std::ofstream output_file(dunst_config_file, std::ios::out | std::ios::trunc);
+  if (!output_file.is_open()) {
+    throw std::ofstream::failure("Couldn't write file : " +
+                                 dunst_config_file.string());
+  }
+
+  output_file << config;
+  output_file.close();
+}

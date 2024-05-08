@@ -31,6 +31,23 @@ constexpr char rofi_color_pattern[] = "* {{\n\
     select-fg:          {};\n\
 }}\
 ";
+
+constexpr char dunst_color_pattern[] = "\
+[urgency_low]\n\
+\tbackground = \"{}\"\n\
+\tforeground = \"{}\"\n\
+\tframe_color = \"{}\"\n\
+\ticon = \"~/.config/dunst/icons/hyprdots.svg\"\n\
+\ttimeout = 10\n\
+\n\
+[urgency_normal]\n\
+\tbackground = \"{}\"\n\
+\tforeground = \"{}\"\n\
+\tframe_color = \"{}\"\n\
+\ticon = \"~/.config/dunst/icons/hyprdots.svg\"\n\
+\ttimeout = 10\n\
+";
+
 }; // namespace ColorManager
 
 #endif

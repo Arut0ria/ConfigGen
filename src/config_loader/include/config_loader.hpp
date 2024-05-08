@@ -24,7 +24,10 @@ private:
       {HYPRLAND_COLOR_FILENAME, "colors.conf"},
       {HYPRLAND_CONFIG_LOCATION, home_directory / ".config/hypr"},
       {ROFI_COLOR_FILENAME, "colors.rasi"},
-      {ROFI_CONFIG_LOCATION, home_directory / ".config/rofi"}};
+      {ROFI_CONFIG_LOCATION, home_directory / ".config/rofi"},
+      {DUNST_PRECONFIG_FILENAME, "dunst.conf"},
+      {DUNST_CONFIG_FILENAME, "dunstrc"},
+      {DUNST_CONFIG_LOCATION, home_directory / ".config/dunst"}};
 
   const std::regex comment_regex = std::regex("(?:^|[:space:]+)#(.*)$");
   std::string strip_comments(const std::string &str);

@@ -20,6 +20,7 @@ int main(int argc, char *argv[]) {
   TIMEIT(ColorManager::update_waybar_colors(colors, variants));
   TIMEIT(ColorManager::update_hyprland_colors(colors, variants, argv[1]));
   TIMEIT(ColorManager::update_rofi_colors(colors, variants));
+  TIMEIT(ColorManager::update_dunst_colors(colors, variants));
 
   return EXIT_SUCCESS;
 }
